@@ -26,13 +26,6 @@ module.exports = require("next-auth");
 
 /***/ }),
 
-/***/ 9783:
-/***/ ((module) => {
-
-module.exports = require("next-auth/providers/discord");
-
-/***/ }),
-
 /***/ 72:
 /***/ ((module) => {
 

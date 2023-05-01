@@ -13,16 +13,11 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony export */ });
 /* harmony import */ var next_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3227);
 /* harmony import */ var next_auth__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_auth__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_auth_providers_discord__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9783);
-/* harmony import */ var next_auth_providers_discord__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_auth_providers_discord__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _next_auth_prisma_adapter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2104);
-/* harmony import */ var _next_auth_prisma_adapter__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_next_auth_prisma_adapter__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _env_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6205);
-/* harmony import */ var _server_db__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5495);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_env_mjs__WEBPACK_IMPORTED_MODULE_3__, _server_db__WEBPACK_IMPORTED_MODULE_4__]);
-([_env_mjs__WEBPACK_IMPORTED_MODULE_3__, _server_db__WEBPACK_IMPORTED_MODULE_4__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
-
-
+/* harmony import */ var _next_auth_prisma_adapter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2104);
+/* harmony import */ var _next_auth_prisma_adapter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_next_auth_prisma_adapter__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _server_db__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5495);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_server_db__WEBPACK_IMPORTED_MODULE_2__]);
+_server_db__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 
 
@@ -40,13 +35,8 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_env
                 }
             })
     },
-    adapter: (0,_next_auth_prisma_adapter__WEBPACK_IMPORTED_MODULE_2__.PrismaAdapter)(_server_db__WEBPACK_IMPORTED_MODULE_4__/* .prisma */ ._),
-    providers: [
-        next_auth_providers_discord__WEBPACK_IMPORTED_MODULE_1___default()({
-            clientId: _env_mjs__WEBPACK_IMPORTED_MODULE_3__/* .env.DISCORD_CLIENT_ID */ .O.DISCORD_CLIENT_ID,
-            clientSecret: _env_mjs__WEBPACK_IMPORTED_MODULE_3__/* .env.DISCORD_CLIENT_SECRET */ .O.DISCORD_CLIENT_SECRET
-        })
-    ]
+    adapter: (0,_next_auth_prisma_adapter__WEBPACK_IMPORTED_MODULE_1__.PrismaAdapter)(_server_db__WEBPACK_IMPORTED_MODULE_2__/* .prisma */ ._),
+    providers: []
 };
 /**
  * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
@@ -120,10 +110,7 @@ const env = (0,_t3_oss_env_nextjs__WEBPACK_IMPORTED_MODULE_1__.createEnv)({
         NEXTAUTH_URL: zod__WEBPACK_IMPORTED_MODULE_0__.z.preprocess(// This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
         // Since NextAuth.js automatically uses the VERCEL_URL if present.
         (str)=>process.env.VERCEL_URL ?? str, // VERCEL_URL doesn't include `https` so it cant be validated as a URL
-        process.env.VERCEL ? zod__WEBPACK_IMPORTED_MODULE_0__.z.string().min(1) : zod__WEBPACK_IMPORTED_MODULE_0__.z.string().url()),
-        // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
-        DISCORD_CLIENT_ID: zod__WEBPACK_IMPORTED_MODULE_0__.z.string(),
-        DISCORD_CLIENT_SECRET: zod__WEBPACK_IMPORTED_MODULE_0__.z.string()
+        process.env.VERCEL ? zod__WEBPACK_IMPORTED_MODULE_0__.z.string().min(1) : zod__WEBPACK_IMPORTED_MODULE_0__.z.string().url())
     },
     /**
    * Specify your client-side environment variables schema here. This way you can ensure the app
@@ -138,9 +125,7 @@ const env = (0,_t3_oss_env_nextjs__WEBPACK_IMPORTED_MODULE_1__.createEnv)({
         DATABASE_URL: process.env.DATABASE_URL,
         NODE_ENV: "production",
         NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-        NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-        DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
-        DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET
+        NEXTAUTH_URL: process.env.NEXTAUTH_URL
     }
 });
 
