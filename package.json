@@ -2,12 +2,14 @@
   "name": "inbrowsermarkdown",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nitesik.github.io/InbrowserMarkdown",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "gh-pages -d .next"
   },
   "dependencies": {
     "@emotion/react": "^11.10.8",
