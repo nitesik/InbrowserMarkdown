@@ -1,1 +1,1 @@
-https://nitesik.github.io/InbrowserMarkdown
+inbrowser-markdown-nitesik.vercel.app
