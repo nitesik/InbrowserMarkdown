@@ -1,1 +1,1 @@
-inbrowser-markdown-nitesik.vercel.app
+https://inbrowser-markdown-nitesik.vercel.app
