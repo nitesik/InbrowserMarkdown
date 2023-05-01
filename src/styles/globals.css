@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  background-color: #1D1F22;
+
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 100ms ease-in-out;
+}
+
+img {
+  cursor: pointer;
+}
+
+.App {
+  display: flex;
+}
+
+.dark {
+  --clr-background-color: #151619;
+  --clr-secondary-background-color: #1D1F22;
+  --clr-primary-color: #FFFFFF;
+  --clr-secondary-text: #C1C4CB;
+  --clr-hr-color: #5A6069;
+}
+
+.light {
+  --clr-background-color: #FFFFFF;
+  --clr-secondary-background-color: #F5F5F5;
+  --clr-primary-color: black;
+  --clr-secondary-text: black;
+  --clr-hr-color: #E4E4E4;
+
+}
+
+.left-nav {
+  width: 250px;
+  transform: scaleX(1);
+  transform-origin: left;
+  background-color: #1D1F22;
+  position: sticky;
+  left: 0;
+  top: 0;
+  padding: 0;
+  display: flex;
+}
+
+.inner-nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 90vh;
+  margin: 27px 24px;
+}
+
+.left-nav-disabled {
+  transform: scaleX(0);
+  width: 0;
+  background-color: #1D1F22;
+
+}
+
+.left-nav-disabled .inner-nav {
+  display: none;
+}
+
+.left-nav .title {
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #7C8187;
+  
+}
+
+.left-nav button, .left-nav-disabled button {
+  padding: 12px 44px ;
+  background-color: #E46643;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  margin-top: 29px;
+}
+
+.App .recentDocs {
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+  overflow-y: auto;
+
+  gap: 24px;
+  margin-top: 24px;
+
+}
+
+.App .recentDocs::-webkit-scrollbar {
+  display: none;
+}
+
+.App .innerDocs {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  
+}
+
+.App .innerDocs:hover {
+}
+
+.App .recentDocs .header {
+  color: #7C8187;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.App .recentDocs .selected .text {
+  color: #E46643;
+}
+
+.App .recentDocs .text:hover {
+}
+
+.App .recentDocs .text {
+  color: white;
+  font-weight: 400;
+  font-size: 15px;
+  margin-top: 3px;
+  overflow-x: 100%;
+  max-width: 100px;
+}
+
+.left-nav .bottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
