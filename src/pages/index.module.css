@@ -364,8 +364,12 @@
     display: none;
   }
   
-  .nav .current_doc .title {
+  .nav .title {
     display: none;
+  }
+
+  .nav .popup .title {
+    display: block;
   }
 
   .container hr {
