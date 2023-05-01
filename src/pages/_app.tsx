@@ -69,11 +69,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
               <div className="title">MY DOCUMENTS</div>
               <button onClick={() => {setDoc_name("NewDocument.md"); setNewFile(true)}}>+ New Document</button>
               <div className="recentDocs">
-                {/* <Image src={doc} width={13} height={16} alt="doc" />
-                <div>
-                  <div className="header">01 April 2022</div>
-                  <div className="text">untitled-document.md</div>
-                </div> */}
+                
                 {viewDocs?.map(doc => <div key={doc.id} className={`innerDocs ${doc_name === doc.document_name && "selected"}`} onClick={e => {setDocId(doc.id); setLoaded(false); setDoc_name(doc.document_name)}}>
                   <Image src={doc_image} width={13} height={16} alt="doc" />
                   <div>
