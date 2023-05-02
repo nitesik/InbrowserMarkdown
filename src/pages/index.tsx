@@ -56,6 +56,7 @@ const Home: NextPage = ({ setLeftNav, doc_content, leftNav, fetchDocs, docId, lo
   function deleteHandler() {
     deleteDoc.mutate({id: docId});
     setDoc_name("welcome.md")
+    setMenuPopup(false);
   }
 
   useEffect(() => {
