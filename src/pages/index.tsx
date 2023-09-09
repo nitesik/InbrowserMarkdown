@@ -29,12 +29,12 @@ const Home: NextPage = ({ setLeftNav, doc_content, leftNav, fetchDocs, docId, lo
   const { data: viewDoc, refetch } = api.document.viewSingleDoc.useQuery({docName: doc_name});
 
 
-  function notify(error: string) {
+  function notify() {
     // alert("File Already Exists")
-    toast(error);
+    toast("File Already Exists");
   }
 
-  const createDoc = api.document.createDoc.useMutation({ onSuccess: (data, variables, context) => { setDoc_name(data.document_name); void refetch(); void fetchDocs();  setLoaded(!loaded); }, onError: (error) => newFile || notify(error.message.toString()) });
+  const createDoc = api.document.createDoc.useMutation({ onSuccess: (data, variables, context) => { setDoc_name(data.document_name); void fetchDocs();  setLoaded(!loaded); }, onError: (error) => newFile || notify() });
   const updateDoc = api.document.updateDoc.useMutation({ onSuccess: () => { void fetchDocs(); } })
   const deleteDoc = api.document.deleteDoc.useMutation({ onSuccess: () => { void fetchDocs(); setDocId(5) }})
 
@@ -46,11 +46,9 @@ const Home: NextPage = ({ setLeftNav, doc_content, leftNav, fetchDocs, docId, lo
     else if (docName !== viewDoc?.document_name)
       createDoc.mutate({documentName: docName, documentContent: text});
       
-    else if (newFile) {
+    else if (newFile) 
       createDoc.mutate({documentName: docName, documentContent: text});
       
-      
-    }
     setNewFile(false);
   }
 
@@ -73,7 +71,7 @@ const Home: NextPage = ({ setLeftNav, doc_content, leftNav, fetchDocs, docId, lo
 
   useEffect(() => {
     setDocName(doc_name);
-    setText(doc_content);
+    // setText(doc_content);
     setLoaded(true);
   }, [newFile]);
   
