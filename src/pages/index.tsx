@@ -1,5 +1,5 @@
 import styles from "./index.module.css";
-import { type NextPage } from "next";
+import { GetServerSidePropsContext, type NextPage } from "next";
 import Head from "next/head";
 // import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
@@ -15,8 +15,9 @@ import delete_icon from "./Images/icon-delete.svg";
 import save_icon from "./Images/icon-save.svg";
 import show_preview from "./Images/icon-show-preview.svg";
 import React, { useEffect, useState } from "react";
+import { TRPCClientErrorLike } from "@trpc/client";
 
-const Home: NextPage = ({ setLeftNav, doc_content, leftNav, fetchDocs, docId, loaded, setLoaded, setDocId, doc_name, newFile, setNewFile, setDoc_name} : any) => {
+const Home: NextPage = ({ setLeftNav, doc_content, leftNav, fetchDocs, docId, loaded, setLoaded, setDocId, doc_name, newFile, setNewFile, setDoc_name, props} : any) => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
   const [text, setText] = useState<string>("");
@@ -25,15 +26,15 @@ const Home: NextPage = ({ setLeftNav, doc_content, leftNav, fetchDocs, docId, lo
   
   const [docName, setDocName] = useState<string>("welcome.md");
 
-  const { data: viewDoc } = api.document.viewSingleDoc.useQuery({docName: doc_name});
+  const { data: viewDoc, refetch } = api.document.viewSingleDoc.useQuery({docName: doc_name});
 
 
-  function notify() {
+  function notify(error: string) {
     // alert("File Already Exists")
-    toast("File Already Exists");
+    toast(error);
   }
 
-  const createDoc = api.document.createDoc.useMutation({ onSuccess: () => { void fetchDocs(); setLoaded(!loaded); }, onError: () => newFile || notify() });
+  const createDoc = api.document.createDoc.useMutation({ onSuccess: (data, variables, context) => { setDoc_name(data.document_name); void refetch(); void fetchDocs();  setLoaded(!loaded); }, onError: (error) => newFile || notify(error.message.toString()) });
   const updateDoc = api.document.updateDoc.useMutation({ onSuccess: () => { void fetchDocs(); } })
   const deleteDoc = api.document.deleteDoc.useMutation({ onSuccess: () => { void fetchDocs(); setDocId(5) }})
 
@@ -42,10 +43,10 @@ const Home: NextPage = ({ setLeftNav, doc_content, leftNav, fetchDocs, docId, lo
     if (docName === viewDoc?.document_name)
       updateDoc.mutate({docName: docName, docContent: text});
     
-    if (docName !== viewDoc?.document_name)
+    else if (docName !== viewDoc?.document_name)
       createDoc.mutate({documentName: docName, documentContent: text});
       
-     if (newFile) {
+    else if (newFile) {
       createDoc.mutate({documentName: docName, documentContent: text});
       
       
@@ -94,7 +95,7 @@ const Home: NextPage = ({ setLeftNav, doc_content, leftNav, fetchDocs, docId, lo
           </div>
 
         </div>
-        {docName !== "welcome.md" && <div className={styles.right_nav}>
+        {viewDoc?.document_name !== "welcome.md" && <div className={styles.right_nav}>
           <Image src={delete_icon} width={18} height={20} alt="delete" onClick={() => setMenuPopup(true)} />
           <div className={styles.save_button} onClick={docHandler}>
             <Image src={save_icon} width={18} height={20} alt="save" />
@@ -133,5 +134,3 @@ const Home: NextPage = ({ setLeftNav, doc_content, leftNav, fetchDocs, docId, lo
 };
 
 export default Home;
-
-
